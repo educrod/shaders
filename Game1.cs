@@ -11,6 +11,7 @@ namespace shaders
 
         Texture2D ship_Sprite;      
         Effect allWhite;
+        Effect pixelationShader;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -33,6 +34,9 @@ namespace shaders
 
             allWhite = Content.Load<Effect>("Shaders");
 
+            pixelationShader = Content.Load<Effect>("Pixelation");
+
+            pixelationShader.Parameters["pixelation"].SetValue(50);
             // TODO: use this.Content to load your game content here
         }
 
@@ -50,7 +54,7 @@ namespace shaders
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, effect: allWhite);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, effect: pixelationShader);
 
             _spriteBatch.Draw(ship_Sprite, new Vector2(150, 50),Color.White);
 
